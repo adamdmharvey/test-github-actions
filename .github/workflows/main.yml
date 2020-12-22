@@ -8,20 +8,20 @@ jobs:
   build:
     runs-on: windows-latest
 
-  env:
-    CI: true
-    NODE_OPTIONS: --max-old-space-size=4096
+    env:
+      CI: true
+      NODE_OPTIONS: --max-old-space-size=4096
 
-  steps:
-    - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-    # credit: https://github.com/appleboy/discord-action/issues/3#issuecomment-731426861
-    - name: Discord notification
-      if: ${{ failure() }}
-      env:
-        DISCORD_WEBHOOK: https://foo.foo
-      run: |
-        $MESSAGE=@"
-        {\"content\": \"Windows master build failed https://github.com/{{GITHUB_REPOSITORY}}/actions/runs/{{GITHUB_RUN_ID}}\"}
-        "@
-        C:\msys64\usr\bin\curl.exe -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST $env:DISCORD_WEBHOOK --data $MESSAGE
+      # credit: https://github.com/appleboy/discord-action/issues/3#issuecomment-731426861
+      - name: Discord notification
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: https://foo.foo
+        run: |
+          $MESSAGE=@"
+          {\"content\": \"Windows master build failed https://github.com/{{GITHUB_REPOSITORY}}/actions/runs/{{GITHUB_RUN_ID}}\"}
+          "@
+          C:\msys64\usr\bin\curl.exe -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST $env:DISCORD_WEBHOOK --data $MESSAGE
