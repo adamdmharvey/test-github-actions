@@ -22,7 +22,7 @@ jobs:
           DISCORD_WEBHOOK: https://foo.foo
         run: |
           $MESSAGE=@"
-          {\"content\": \"Windows master build failed https://github.com/{{GITHUB_REPOSITORY}}/actions/runs/{{GITHUB_RUN_ID}}\"}
+          {\"content\": \"Windows master build failed https://github.com/${{GITHUB_REPOSITORY}}/actions/runs/${{GITHUB_RUN_ID}}\"}
           "@
           echo $message
           C:\msys64\usr\bin\curl.exe -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST $env:DISCORD_WEBHOOK --data $MESSAGE
