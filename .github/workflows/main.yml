@@ -17,7 +17,7 @@ jobs:
 
       # credit: https://github.com/appleboy/discord-action/issues/3#issuecomment-731426861
       - name: Discord notification
-        if: ${{ failure() }}
+        #if: ${{ failure() }}
         env:
           DISCORD_WEBHOOK: https://foo.foo
         run: |
